@@ -72,34 +72,48 @@
         <div class="samples">
           <section class="convo convo--bad" aria-label="მარტო გამარჯობა — ნელი">
             <div class="convo__msgs">
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
               <p class="b b--out">გამარჯობა <time>09:12</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">გამარჯობა <time>09:14</time></p>
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
               <p class="b b--out">გამომიგზავნი გუშინდელი პრეზენტაციის ფაილს? <time>09:15</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">აი, ახლავე <time>09:17</time></p>
             </div>
           </section>
 
           <section class="convo convo--bad" aria-label="მარტო აქ ხარ — ნელი">
             <div class="convo__msgs">
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
               <p class="b b--out">აქ ხარ? <time>15:47</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">აქ ვარ, გისმენ <time>15:50</time></p>
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
               <p class="b b--out">გამომიგზავნი გუშინდელი პრეზენტაციის ფაილს? <time>15:51</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">აი, ახლავე <time>15:53</time></p>
             </div>
           </section>
 
           <section class="convo convo--bad" aria-label="მარტო სახელი — ნელი">
             <div class="convo__msgs">
-              <p class="b b--out">ზურა <time>11:20</time></p>
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
+              <p class="b b--out"><span class="nm nm-to">ზურა</span> <time>11:20</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">რა მოხდა? <time>11:22</time></p>
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
               <p class="b b--out">გამომიგზავნი გუშინდელი პრეზენტაციის ფაილს? <time>11:23</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">აი, ახლავე <time>11:25</time></p>
             </div>
           </section>
 
           <section class="convo convo--good" aria-label="სრული კითხვა — სწრაფი">
             <div class="convo__msgs">
-              <p class="b b--out">გამარჯობა, ზურა! გამომიგზავნი გუშინდელი პრეზენტაციის ფაილს? <time>13:02</time></p>
+              <span class="b__name b__name--out nm nm-from">არისტოტელე</span>
+              <p class="b b--out">გამარჯობა, <span class="nm nm-to">ზურა</span>! გამომიგზავნი გუშინდელი პრეზენტაციის ფაილს? <time>13:02</time></p>
+              <span class="b__name b__name--in nm nm-to">ზურა</span>
               <p class="b b--in">აი, ახლავე <time>13:04</time></p>
             </div>
           </section>
@@ -114,11 +128,19 @@
         </ol>
 
         <section class="share" aria-label="გააზიარე">
-          <p class="share__note">შემდეგ ჯერზე, ვინც „აქ ხარ“-ს დაგიწერს — გაუგზავნე ეს ბმული.</p>
+          <p class="share__note">შემდეგ ჯერზე, ვინც მოგწერს „აქ ხარ?“ — გაუგზავნე ეს ბმული.</p>
+          <div class="share__names">
+            <label class="share__field">შენი სახელი
+              <input class="nm-input" data-role="to" type="text" value="ზურა" maxlength="24" spellcheck="false" autocomplete="off" inputmode="text" />
+            </label>
+            <label class="share__field">კოლეგის სახელი
+              <input class="nm-input" data-role="from" type="text" value="არისტოტელე" maxlength="24" spellcheck="false" autocomplete="off" inputmode="text" />
+            </label>
+          </div>
           <div class="share__row">
             <code class="share__url">aqxar.ge</code>
-            <button class="btn" type="button" data-copy data-url="https://aqxar.ge">
-              <span data-copy-label>კოპირება</span>
+            <button class="btn" type="button" data-copy>
+              <span data-copy-label>ბმულის კოპირება</span>
             </button>
           </div>
         </section>

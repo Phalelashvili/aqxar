@@ -128,7 +128,17 @@ a:hover { color: var(--text); }
   border-radius: 18px;
   padding: 1.15rem 1.15rem 1.35rem;
 }
-.convo__msgs { display: flex; flex-direction: column; gap: 0.45rem; }
+.convo__msgs { display: flex; flex-direction: column; }
+/* sender name above each bubble, on that person's side — like a group chat */
+.b__name {
+  font-size: 0.68rem;
+  color: var(--muted);
+  padding: 0 0.35rem;
+  margin: 0.6rem 0 0.18rem;
+}
+.b__name:first-child { margin-top: 0; }
+.b__name--out { align-self: flex-end; }
+.b__name--in { align-self: flex-start; }
 .b {
   margin: 0;
   width: fit-content;
@@ -145,6 +155,8 @@ a:hover { color: var(--text); }
   opacity: 0.5;
   white-space: nowrap;
 }
+/* keep selected text legible on the coloured (coral/green) bubbles */
+.b::selection, .b ::selection { background: var(--text); color: var(--bg); }
 /* incoming (the other person) */
 .b--in {
   align-self: flex-start;
@@ -188,7 +200,27 @@ a:hover { color: var(--text); }
 
 /* ---- share ---- */
 .share { max-width: 34rem; margin-top: clamp(2.75rem, 8vh, 4.5rem); }
-.share__note { margin: 0 0 1rem; color: var(--muted); font-size: 0.95rem; }
+.share__note { margin: 0 0 1.1rem; color: var(--muted); font-size: 0.95rem; }
+.share__names { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0 0 1.1rem; }
+.share__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.nm-input {
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  width: 12rem;
+  max-width: 100%;
+}
+.nm-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .share__row {
   display: inline-flex;
   align-items: stretch;
