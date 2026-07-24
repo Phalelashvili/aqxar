@@ -1,0 +1,267 @@
+/* aqxar.ge — quiet and minimal. one accent, one voice. */
+
+:root {
+  --bg:      #101013;
+  --surface: #1C1C21;
+  --text:    #E9E7E3;
+  --muted:   #918F97;
+  --line:    rgba(255, 255, 255, 0.08);
+  --accent:  #E8897B;   /* the timer, links, and the "ასე არა" side */
+  --accent-ink: #2A0E0B;
+  --good:    #77C990;   /* only the "ასე ჯობია" side */
+  --good-ink: #08210F;
+
+  --sans: "Noto Sans Georgian", system-ui, -apple-system, sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.06rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { color: var(--text); }
+
+::selection { background: rgba(232, 137, 123, 0.25); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.page {
+  min-height: 100svh;
+  max-width: 70rem;               /* wide enough for three roomy samples side by side */
+  margin: 0 auto;
+  padding: clamp(2.5rem, 8vh, 4rem) clamp(1.25rem, 5vw, 2rem) 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* text stays in a comfortable reading column; only the samples go full width */
+.ask, .lead, .steps { max-width: 34rem; }
+
+/* ---- GitHub: a small button floating in the top-right corner, fixed on scroll ---- */
+.gh {
+  position: fixed;
+  top: clamp(0.85rem, 2.5vw, 1.5rem);
+  right: clamp(0.85rem, 2.5vw, 1.5rem);
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.gh:hover { color: var(--text); border-color: var(--muted); }
+.gh svg { display: block; }
+
+/* ---- the ping + timer (the one interactive moment) ---- */
+.ask { margin-bottom: clamp(1.75rem, 5vh, 2.75rem); }
+
+.bubble {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--surface);
+  border-radius: 16px 16px 16px 5px;
+  font-size: 1.1rem;
+}
+
+.typing { display: none; gap: 5px; }
+.typing i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted);
+  animation: blink 1.3s ease-in-out infinite;
+}
+.typing i:nth-child(2) { animation-delay: 0.18s; }
+.typing i:nth-child(3) { animation-delay: 0.36s; }
+
+.timer {
+  margin: 0.8rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.timer b {
+  color: var(--accent);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the point ---- */
+.lead {
+  margin: 0 0 clamp(2rem, 6vh, 3rem);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* ---- sample conversations: three "don't" chats in a row, the good one below ---- */
+.samples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.convo {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.15rem 1.15rem 1.35rem;
+}
+.convo__msgs { display: flex; flex-direction: column; gap: 0.45rem; }
+.b {
+  margin: 0;
+  width: fit-content;
+  max-width: 86%;
+  padding: 0.55rem 0.85rem;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  border-radius: 15px;
+}
+.b time {
+  margin-left: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+/* incoming (the other person) */
+.b--in {
+  align-self: flex-start;
+  background: var(--surface);
+  border-bottom-left-radius: 4px;
+}
+/* outgoing (you) — coloured by whether it's the good or bad way */
+.b--out { align-self: flex-end; border-bottom-right-radius: 4px; }
+.convo--bad  .b--out { background: var(--accent); color: var(--accent-ink); }
+.convo--good .b--out { background: var(--good);   color: var(--good-ink); }
+
+/* the good example sits on its own row below, centred and a touch wider */
+.convo--good {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 0.75rem;
+}
+
+/* ---- one question, five steps (numbered list, no heading) ---- */
+.steps {
+  list-style: none;
+  margin: clamp(2.5rem, 7vh, 4rem) 0 0;
+  padding: 0;
+}
+.steps li {
+  display: grid;
+  grid-template-columns: 1.7rem 1fr;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+}
+.steps li:first-child { border-top: none; padding-top: 0; }
+.steps__n {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+
+/* ---- share ---- */
+.share { max-width: 34rem; margin-top: clamp(2.75rem, 8vh, 4.5rem); }
+.share__note { margin: 0 0 1rem; color: var(--muted); font-size: 0.95rem; }
+.share__row {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.35rem 0.35rem 1.15rem;
+  max-width: 100%;
+}
+.share__url {
+  align-self: center;
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.btn {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.btn:active { transform: none; }
+.btn.is-done { background: var(--good); color: var(--good-ink); }
+
+/* on narrower screens three across gets cramped — stack them full width */
+@media (max-width: 58rem) {
+  .samples { grid-template-columns: 1fr; }
+  .convo--good {
+    grid-column: auto;
+    justify-self: stretch;
+    max-width: none;
+    margin-top: 0.75rem;
+  }
+}
+
+/* ---- reveal (progressive enhancement, gated on .js) ---- */
+.js .typing { display: inline-flex; }
+.js .ask__text { display: none; }
+.js .ask.is-typed .typing { display: none; }
+.js .ask.is-typed .ask__text { display: inline; }
+
+.js .timer { visibility: hidden; }
+.js .ask.is-typed .timer { visibility: visible; }
+
+.js .say { opacity: 0; transform: translateY(8px); }
+.js .say.is-shown {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js .typing { display: none; }
+  .js .ask__text { display: inline; }
+  .js .ask.is-typed .timer { visibility: hidden; }
+  .js .say { opacity: 1; transform: none; }
+}
