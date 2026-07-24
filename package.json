@@ -1,0 +1,21 @@
+{
+  "name": "aqxar",
+  "version": "1.0.0",
+  "description": "აქ ხარ? — დაწერე კითხვა, ერთ შეტყობინებაში",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "lint": "echo 'No linting configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  },
+  "keywords": [
+    "messaging",
+    "communication",
+    "georgian"
+  ],
+  "author": "",
+  "license": "MIT"
+}
